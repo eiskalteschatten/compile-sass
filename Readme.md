@@ -101,4 +101,4 @@ compileSass.setupCleanupOnExit('full/path/to/css');
 
 ## Maintainer
 
-This modules is maintained by Alex Seifert ([Website](https://www.alexseifert.com, [Github](https://github.com/eiskalteschatten))
+This modules is maintained by Alex Seifert ([Website](https://www.alexseifert.com), [Github](https://github.com/eiskalteschatten))
