@@ -80,9 +80,9 @@ function compileSass(fullSassPath) {
 }
 
 
-function compileSassAndSave(sassPath, cssPath, sassFile) {
-  const fullSassPath = path.join(sassPath, sassFile);
-  const sassFileExt = sassFile.match(/\.[0-9a-z]+$/i);
+function compileSassAndSave(fullSassPath, cssPath) {
+  const sassFile = fullSassPath.match(/[ \w-]+[.]+[\w]+$/)[0];
+  const sassFileExt = sassFile.match(/\.[0-9a-z]+$/i)[0];
   const cssFile = sassFile.replace(sassFileExt, '.css');
   const fullCssPath = path.join(cssPath, cssFile);
 
@@ -125,7 +125,7 @@ function compileSassAndSaveMultiple(options) {
   const cssPath = options.cssPath;
 
   options.files.forEach(sassFile => {
-    compileSassAndSave(sassPath, cssPath, sassFile).then(cssFile => {
+    compileSassAndSave(path.join(sassPath, sassFile), cssPath).then(cssFile => {
       console.log('Created', cssFile);
     }).catch(console.error);
   });
