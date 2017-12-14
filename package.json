@@ -1,0 +1,26 @@
+{
+  "name": "compile-sass",
+  "version": "0.0.1",
+  "description": "A module to compile SASS on-the-fly and/or save it to CSS files",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/eiskalteschatten/compile-sass.git"
+  },
+  "keywords": [
+    "sass",
+    "scss",
+    "css",
+    "express",
+    "compile"
+  ],
+  "author": "Alex Seifert",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/eiskalteschatten/compile-sass/issues"
+  },
+  "homepage": "https://github.com/eiskalteschatten/compile-sass#readme"
+}
