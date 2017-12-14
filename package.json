@@ -15,12 +15,19 @@
     "scss",
     "css",
     "express",
-    "compile"
+    "compile",
+    "style",
+    "preprocess",
+    "libsass"
   ],
   "author": "Alex Seifert",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/eiskalteschatten/compile-sass/issues"
   },
-  "homepage": "https://github.com/eiskalteschatten/compile-sass#readme"
+  "homepage": "https://github.com/eiskalteschatten/compile-sass#readme",
+  "dependencies": {
+    "mkdirp": "^0.5.1",
+    "node-sass": "^4.7.2"
+  }
 }
