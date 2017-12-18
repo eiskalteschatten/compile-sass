@@ -8,8 +8,6 @@ const exec = require('child_process').exec;
 
 const nodeEnv = process.env.NODE_ENV;
 
-let hasSetupCleanupOnExit = false;
-
 module.exports = setup;
 module.exports.compileSass = compileSass;
 module.exports.compileSassAndSave = compileSassAndSave;
@@ -86,8 +84,6 @@ function compileSassAndSave(fullSassPath, cssPath) {
   const cssFile = sassFile.replace(sassFileExt, '.css');
   const fullCssPath = path.join(cssPath, cssFile);
 
-  setupCleanupOnExit(cssPath);
-
   return compileSass(fullSassPath).then(css => {
     return new Promise((resolve, reject) => {
       mkdirp(cssPath, error => {
@@ -133,20 +129,13 @@ function compileSassAndSaveMultiple(options) {
 
 
 function setupCleanupOnExit(cssPath) {
-  if (!hasSetupCleanupOnExit){
-    process.on('SIGINT', () => {
-      console.log('Exiting, running CSS cleanup');
+  console.log('Exiting, running CSS cleanup');
 
-      exec(`rm -r ${cssPath}`, function(error) {
-        if (error) {
-          console.error(error);
-          process.exit(1);
-        }
+  exec(`rm -r ${cssPath}`, function(error) {
+    if (error) {
+      throw new Error(error);
+    }
 
-        console.log('Deleted CSS files');
-      });
-    });
-
-    hasSetupCleanupOnExit = true;
-  }
+    console.log('Deleted CSS files');
+  });
 }

@@ -91,14 +91,22 @@ compileSass.compileSassAndSaveMultiple({
 
 ### setupCleanupOnExit()
 
-Deletes the passed directory when the app is exited (SIGINT). The idea is to pass the directory where your compiled CSS files are, so that they can be deleted when the app is exited and recompiled when the app starts.
+Deletes the passed directory when the app is exited. The idea is to pass the directory where your compiled CSS files are, so that they can be deleted when the app is exited and recompiled when the app starts.
 
 ```js
 const compileSass = require('compile-sass');
-compileSass.setupCleanupOnExit('full/path/to/css');
+process.on('SIGINT', () => {
+  try {
+    compileSass.setupCleanupOnExit('full/path/to/css');
+    process.exit(0);
+  }
+  catch(error) {
+    process.exit(1);
+  }
+});
 ```
 
 
 ## Maintainer
 
-This modules is maintained by Alex Seifert ([Website](https://www.alexseifert.com), [Github](https://github.com/eiskalteschatten))
+This modules is maintained by Alex Seifert ([Website](https://www.alexseifert.com), [Github](https://github.com/eiskalteschatten)).
