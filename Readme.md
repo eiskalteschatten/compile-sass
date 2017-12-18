@@ -62,7 +62,7 @@ Returns the compiled SASS as a string.
 
 ```js
 const compileSass = require('compile-sass');
-compileSass.compileSass().then(...).catch(...);
+const cssString = compileSass.compileSass().then(...).catch(...);
 ```
 
 ### compileSassAndSave()
