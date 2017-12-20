@@ -50,7 +50,7 @@ compileSass.compileSassAndSaveMultiple({
     cssPath: path.join(__dirname, 'public/css/'),
     files: ['libs.scss']
   });
-}));
+})).then(...).catch(...);
 ```
 
 

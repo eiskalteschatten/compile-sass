@@ -8,6 +8,8 @@ const exec = require('child_process').exec;
 
 const nodeEnv = process.env.NODE_ENV;
 
+let hasSetupCleanupOnExit = false;
+
 module.exports = setup;
 module.exports.compileSass = compileSass;
 module.exports.compileSassAndSave = compileSassAndSave;
@@ -84,6 +86,8 @@ function compileSassAndSave(fullSassPath, cssPath) {
   const cssFile = sassFile.replace(sassFileExt, '.css');
   const fullCssPath = path.join(cssPath, cssFile);
 
+  setupCleanupOnExit(cssPath);
+
   return compileSass(fullSassPath).then(css => {
     return new Promise((resolve, reject) => {
       mkdirp(cssPath, error => {
@@ -120,22 +124,37 @@ function compileSassAndSaveMultiple(options) {
   const sassPath = options.sassPath;
   const cssPath = options.cssPath;
 
-  options.files.forEach(sassFile => {
-    compileSassAndSave(path.join(sassPath, sassFile), cssPath).then(cssFile => {
-      console.log('Created', cssFile);
-    }).catch(console.error);
+  return new Promise((resolve, reject) => {
+    options.files.forEach(sassFile => {
+      compileSassAndSave(path.join(sassPath, sassFile), cssPath).then(cssFile => {
+        console.log('Created', cssFile);
+      }).catch(error => {
+        reject(error);
+      });
+    });
+
+    resolve();
+  }).catch(error => {
+    throw new Error(error);
   });
 }
 
 
 function setupCleanupOnExit(cssPath) {
-  console.log('Exiting, running CSS cleanup');
+  if (!hasSetupCleanupOnExit){
+    process.on('SIGINT', () => {
+      console.log('Exiting, running CSS cleanup');
 
-  exec(`rm -r ${cssPath}`, function(error) {
-    if (error) {
-      throw new Error(error);
-    }
+      exec(`rm -r ${cssPath}`, function(error) {
+        if (error) {
+          console.error(error);
+          process.exit(1);
+        }
 
-    console.log('Deleted CSS files');
-  });
+        console.log('Deleted CSS files');
+      });
+    });
+
+    hasSetupCleanupOnExit = true;
+  }
 }
