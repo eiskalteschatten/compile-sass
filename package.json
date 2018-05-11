@@ -27,7 +27,6 @@
   },
   "homepage": "https://github.com/eiskalteschatten/compile-sass#readme",
   "dependencies": {
-    "hawk": "^7.0.7",
     "hoek": "^5.0.3",
     "mkdirp": "^0.5.1",
     "node-sass": "^4.9.0"
