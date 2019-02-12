@@ -108,6 +108,8 @@ process.on('SIGINT', () => {
 
 ### Preventing CSS directory cleanup
 
+To prevent the CSS directory from being deleted, add `preventCssCleanup` to the compile and save calls.
+
 ```js
 const compileSass = require('compile-sass');
 const preventCssCleanup = true;
