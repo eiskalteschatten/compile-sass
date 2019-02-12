@@ -106,6 +106,27 @@ process.on('SIGINT', () => {
 });
 ```
 
+### Preventing CSS directory cleanup
+
+```js
+const compileSass = require('compile-sass');
+const preventCssCleanup = true;
+compileSass.compileSassAndSave('full/path/to/sass-file.scss', 'full/path/to/css/', preventCssCleanup)
+  .then(...)
+  .catch(...);
+```
+
+```js
+const compileSass = require('compile-sass');
+const preventCssCleanup = true;
+compileSass.compileSassAndSaveMultiple({
+    sassPath: path.join(__dirname, 'public/scss/'),
+    cssPath: path.join(__dirname, 'public/css/'),
+    files: ['libs.scss'],
+    preventCssCleanup
+  });
+}).then(...).catch(...);
+```
 
 ## Maintainer
 
