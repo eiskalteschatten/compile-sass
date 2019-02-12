@@ -80,13 +80,15 @@ function compileSass(fullSassPath) {
 }
 
 
-function compileSassAndSave(fullSassPath, cssPath) {
+function compileSassAndSave(fullSassPath, cssPath, preventCssCleanup = false) {
   const sassFile = fullSassPath.match(/[ \w-]+[.]+[\w]+$/)[0];
   const sassFileExt = sassFile.match(/\.[0-9a-z]+$/i)[0];
   const cssFile = sassFile.replace(sassFileExt, '.css');
   const fullCssPath = path.join(cssPath, cssFile);
 
-  setupCleanupOnExit(cssPath);
+  if (!preventCssCleanup) {
+    setupCleanupOnExit(cssPath);
+  }
 
   return compileSass(fullSassPath).then(css => {
     return new Promise((resolve, reject) => {
@@ -116,17 +118,19 @@ function compileSassAndSave(fullSassPath, cssPath) {
 OPTIONS: {
     sassPath,
     cssPath,
-    files
+    files,
+    preventCssCleanup
   }
 */
 
 function compileSassAndSaveMultiple(options) {
   const sassPath = options.sassPath;
   const cssPath = options.cssPath;
+  const preventCssCleanup = options.preventCssCleanup || false;
 
   return new Promise((resolve, reject) => {
     options.files.forEach(sassFile => {
-      compileSassAndSave(path.join(sassPath, sassFile), cssPath).then(cssFile => {
+      compileSassAndSave(path.join(sassPath, sassFile, preventCssCleanup), cssPath).then(cssFile => {
         console.log('Created', cssFile);
       }).catch(error => {
         reject(error);
