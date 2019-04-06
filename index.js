@@ -34,7 +34,7 @@ function setup(options) {
   return function(req, res) {
     const cssName = req.params.cssName.replace(/\.css/, '');
     const sassFile = path.join(sassFilePath, cssName + '.' + sassFileExt);
-    const sassOptions = Object.assign(options.nodeSassOptions, { file: sassFile });
+    const sassOptions = Object.assign(options.nodeSassOptions || {}, { file: sassFile });
 
     if (!embedSrcMapInProd || nodeEnv !== 'production') {
       sassOptions.sourceMapEmbed = true;
