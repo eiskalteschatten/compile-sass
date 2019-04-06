@@ -2,11 +2,24 @@
 
 > A module to compile SASS on-the-fly and/or save it to CSS files using [node-sass](https://github.com/sass/node-sass)
 
-*This module is still in its infancy. More documentation and features will be added as it matures.*
+The goal of this project is twofold:
+1. To provide a library that can compile SASS files on page load when using `NODE_ENV=development` in order to reduce development time (on-the-fly)
+2. To enable compilation and saving of SASS files to CSS files on all other environments when, for example, the application starts or with an npm script
+
+
+## Table of Contents
+
+- <a href="#requirements">Requirements</a>
+- <a href="#install">Install</a>
+- <a href="#usage">Usage</a>
+- <a href="#api">API</a>
+- <a href="#maintainer">Maintainer</a>
+
 
 ## Requirements
 
-This module is tested with Node.js 8 and 9. It might work with Node.js 6 or 7, but is not tested.
+This module is tested with Node.js 10 and 11. It might work with Node.js >= 9, but is not tested.
+
 
 ## Install
 
