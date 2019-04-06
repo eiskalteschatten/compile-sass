@@ -43,7 +43,12 @@ const compileSass = require('compile-sass');
 app.use('/css/:cssName', compileSass({
 	sassFilePath: path.join(__dirname, 'public/scss/'),
 	sassFileExt: 'sass',
-	embedSrcMapInProd: true
+  embedSrcMapInProd: true,
+  nodeSassOptions: {
+    errLogToConsole: true,
+    noCache: true,
+    force: true
+  }
 }));
 ```
 
@@ -52,6 +57,7 @@ app.use('/css/:cssName', compileSass({
 - sassFilePath (default: 'public/scss')
 - sassFileExt (default: 'scss')
 - embedSrcMapInProd (default: false)
+- nodeSassOptions (default: {})
 
 
 ### For compiling and saving as static CSS files

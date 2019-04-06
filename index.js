@@ -20,11 +20,13 @@ module.exports.setupCleanupOnExit = setupCleanupOnExit;
   OPTIONS: {
     sassFilePath (default: 'public/scss'),
     sassFileExt (default: 'scss'),
-    embedSrcMapInProd (default: false)
+    embedSrcMapInProd (default: false),
+    nodeSassOptions (default: {})
   }
 */
 
 function setup(options) {
+
   const sassFilePath = options.sassFilePath || path.join(__dirname, '../public/scss/');
   const sassFileExt = options.sassFileExt || 'scss';
   const embedSrcMapInProd = options.embedSrcMapInProd || false;
@@ -32,9 +34,7 @@ function setup(options) {
   return function(req, res) {
     const cssName = req.params.cssName.replace(/\.css/, '');
     const sassFile = path.join(sassFilePath, cssName + '.' + sassFileExt);
-    const sassOptions = {
-      file: sassFile
-    };
+    const sassOptions = Object.assign(options.nodeSassOptions, { file: sassFile });
 
     if (!embedSrcMapInProd || nodeEnv !== 'production') {
       sassOptions.sourceMapEmbed = true;
