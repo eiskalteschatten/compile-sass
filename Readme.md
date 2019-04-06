@@ -41,8 +41,8 @@ app.use('/css/:cssName', compileSass());
 ```js
 const compileSass = require('compile-sass');
 app.use('/css/:cssName', compileSass({
-	sassFilePath: path.join(__dirname, 'public/scss/'),
-	sassFileExt: 'sass',
+  sassFilePath: path.join(__dirname, 'public/scss/'),
+  sassFileExt: 'sass',
   embedSrcMapInProd: true,
   nodeSassOptions: {
     errLogToConsole: true,
