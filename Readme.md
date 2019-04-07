@@ -11,6 +11,7 @@ The goal of this project is twofold:
 
 - <a href="#requirements">Requirements</a>
 - <a href="#install">Install</a>
+- <a href="#example-usage">Example Usage</a>
 - <a href="#usage">Usage</a>
 - <a href="#api">API</a>
 - <a href="#maintainer">Maintainer</a>
@@ -26,6 +27,15 @@ This module is tested with Node.js 10 and 11. It might work with Node.js >= 9, b
 ```
 npm install --save compile-sass
 ```
+
+## Example Usage
+
+The following are a couple of examples of how you can use it in a real-life application:
+
+- Setup: [Node.js](https://github.com/eiskalteschatten/nodejs-webapp/blob/master/src/lib/booting/compileSass.js) / [TypeScript](https://github.com/eiskalteschatten/typescript-webapp/blob/master/src/lib/booting/compileSass.ts)
+- Configuration: [Node.js](https://github.com/eiskalteschatten/nodejs-webapp/blob/master/config/default.js#L23) / [TypeScript](https://github.com/eiskalteschatten/typescript-webapp/blob/master/config/default.ts#L35)
+- Integration into the app: [Node.js](https://github.com/eiskalteschatten/nodejs-webapp/blob/master/src/app.js#L46) / [TypeScript](https://github.com/eiskalteschatten/typescript-webapp/blob/master/src/app.ts#L30)
+
 
 ## Usage
 
