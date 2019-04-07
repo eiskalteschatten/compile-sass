@@ -14,6 +14,7 @@ The goal of this project is twofold:
 - <a href="#example-usage">Example Usage</a>
 - <a href="#usage">Usage</a>
 - <a href="#api">API</a>
+- <a href="#release-notes">Release Notes</a>
 - <a href="#maintainer">Maintainer</a>
 
 
@@ -134,6 +135,18 @@ process.on('SIGINT', () => {
   }
 });
 ```
+
+
+## Release Notes
+
+### 0.1.1
+
+- Add more documentation
+
+### 0.1.0
+
+- Add the ability to pass options to `node-sass`
+- Add further documentation
 
 
 ## Maintainer
