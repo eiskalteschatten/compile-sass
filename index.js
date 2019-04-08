@@ -26,7 +26,6 @@ module.exports.setupCleanupOnExit = setupCleanupOnExit;
 */
 
 function setup(options) {
-
   const sassFilePath = options.sassFilePath || path.join(__dirname, '../public/scss/');
   const sassFileExt = options.sassFileExt || 'scss';
   const embedSrcMapInProd = options.embedSrcMapInProd || false;
