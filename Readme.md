@@ -139,6 +139,10 @@ process.on('SIGINT', () => {
 
 ## Release Notes
 
+### 0.1.2
+
+- Update node-sass
+
 ### 0.1.1
 
 - Add more documentation
