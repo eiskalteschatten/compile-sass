@@ -29,6 +29,6 @@
   "dependencies": {
     "hoek": "^5.0.4",
     "mkdirp": "^0.5.1",
-    "node-sass": "^4.11.0"
+    "node-sass": "^4.12.0"
   }
 }
