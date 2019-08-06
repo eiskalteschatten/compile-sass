@@ -5,8 +5,8 @@
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
   "scripts": {
-    "test": "NODE_ENV=test jest --watch --verbose .",
-    "test:ci": "NODE_ENV=test jest .",
+    "test:watch": "NODE_ENV=test jest --watch --verbose .",
+    "test": "NODE_ENV=test jest .",
     "build": "tsc",
     "start": "tsc -w"
   },
