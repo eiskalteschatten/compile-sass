@@ -117,14 +117,6 @@ export interface CompileMultipleOptions {
   files: string[];
 }
 
-/*
-OPTIONS: {
-    sassPath,
-    cssPath,
-    files
-  }
-*/
-
 export function compileSassAndSaveMultiple(options: CompileMultipleOptions): Promise<any> {
   const sassPath = options.sassPath;
   const cssPath = options.cssPath;
