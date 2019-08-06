@@ -22,7 +22,7 @@ The goal of this project is twofold:
 
 ## Requirements
 
-This module is tested with Node.js 10 and 11. It might work with Node.js >= 9, but is not tested.
+This module is tested with Node.js >= 10. It might work with Node.js <= 9, but is not tested.
 
 
 ## Install
