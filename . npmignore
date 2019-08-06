@@ -1,7 +1,0 @@
-test-coverage
-test-data
-src
-jest.config.js
-.travis.yml
-tsconfig.json
-.gitignore
