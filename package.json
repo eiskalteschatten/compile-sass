@@ -1,6 +1,6 @@
 {
   "name": "compile-sass",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "description": "A module to compile SASS on-the-fly and/or save it to CSS files",
   "main": "index.js",
   "scripts": {

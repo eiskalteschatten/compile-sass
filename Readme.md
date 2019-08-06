@@ -139,6 +139,10 @@ process.on('SIGINT', () => {
 
 ## Release Notes
 
+### 0.1.4
+
+- Update dependencies to fix security vulnerabilities
+
 ### 0.1.3
 
 - Fix security vulnerabilities
