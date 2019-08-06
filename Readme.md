@@ -187,6 +187,7 @@ process.on('SIGINT', () => {
 
 - Optimize what is included when the package is published (no more test files!)
 - Fix a couple of broken links in the Readme
+- Include LICENSE
 
 
 ### 1.0.0
