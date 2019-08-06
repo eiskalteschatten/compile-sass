@@ -1,5 +1,7 @@
 # compile-sass
 
+[![Build Status](https://travis-ci.org/eiskalteschatten/compile-sass.svg?branch=master)](https://travis-ci.org/eiskalteschatten/compile-sass)
+
 > A module to compile SASS on-the-fly and/or save it to CSS files using [node-sass](https://github.com/sass/node-sass)
 
 The goal of this project is twofold:
