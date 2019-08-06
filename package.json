@@ -36,6 +36,10 @@
   },
   "devDependencies": {
     "@types/node": "^12.6.9",
+    "@types/node-sass": "^4.11.0",
     "typescript": "^3.5.3"
+  },
+  "peerDependencies": {
+    "express": "^4.17.1"
   }
 }
