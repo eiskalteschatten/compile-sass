@@ -25,7 +25,7 @@ export interface SetupOptions {
   }
 */
 
-export default function setup(options: SetupOptions): Application {
+export function setup(options: SetupOptions): Application {
   const sassFilePath = options.sassFilePath || path.join(__dirname, '../public/scss/');
   const sassFileExt = options.sassFileExt || 'scss';
   const embedSrcMapInProd = options.embedSrcMapInProd || false;
@@ -53,6 +53,8 @@ export default function setup(options: SetupOptions): Application {
     });
   };
 }
+
+export default setup;
 
 
 export function compileSass(fullSassPath: string): Promise<any> {
