@@ -183,6 +183,12 @@ process.on('SIGINT', () => {
 
 ## Release Notes
 
+### 1.0.1
+
+- Optimize what is included when the package is published (no more test files!)
+- Fix a couple of broken links in the Readme
+
+
 ### 1.0.0
 
 - Complete re-write with TypeScript
