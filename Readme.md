@@ -141,6 +141,12 @@ process.on('SIGINT', () => {
 
 ## Release Notes
 
+### 1.0.0
+
+- Complete re-write with TypeScript
+- Include typings for TypeScript
+- Include automated testing for better stability
+
 ### 0.1.4
 
 - Update dependencies to fix security vulnerabilities

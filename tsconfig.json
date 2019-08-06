@@ -9,5 +9,8 @@
     "declaration": true,
     "outDir": "./dist",
     "baseUrl": "./src"
-  }
+  },
+  "exclude": [
+    "**/*.spec.ts"
+  ]
 }
