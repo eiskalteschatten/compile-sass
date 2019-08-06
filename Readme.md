@@ -141,7 +141,7 @@ Compiles the given SASS file and saves it in the given directory.
 import { compileSassAndSave } from 'compile-sass'; // TypeScript
 const { compileSassAndSave } = require('compile-sass'); // CommonJS
 
-compileSassAndSave('full/path/to/sass-file.scss', 'full/path/to/css/').then(...).catch(...);
+await compileSassAndSave('full/path/to/sass-file.scss', 'full/path/to/css/');
 ```
 
 
@@ -153,12 +153,12 @@ Compiles multiple SASS files defined in the "files" option. They must all be loc
 import { compileSassAndSaveMultiple } from 'compile-sass'; // TypeScript
 const { compileSassAndSaveMultiple } = require('compile-sass'); // CommonJS
 
-compileSassAndSaveMultiple({
+await compileSassAndSaveMultiple({
     sassPath: path.join(__dirname, 'public/scss/'),
     cssPath: path.join(__dirname, 'public/css/'),
     files: ['libs.scss']
   });
-}).then(...).catch(...);
+});
 ```
 
 ### setupCleanupOnExit()
