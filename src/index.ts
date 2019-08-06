@@ -1,6 +1,6 @@
 import * as path from 'path';
 import * as fs from 'fs';
-import mkdirp from 'mkdirp';
+import * as mkdirp from 'mkdirp';
 import * as sass from 'node-sass';
 import { exec } from 'child_process';
 import { Request, Response } from 'express';
@@ -93,7 +93,7 @@ export function compileSassAndSave(fullSassPath: string, cssPath: string): Promi
         if (error) {
           return reject(error);
         }
-
+        
         resolve();
       });
     }).then(() => {
@@ -121,15 +121,15 @@ export function compileSassAndSaveMultiple(options: CompileMultipleOptions): Pro
   const sassPath = options.sassPath;
   const cssPath = options.cssPath;
 
-  return new Promise((resolve, reject) => {
-    options.files.forEach(sassFile => {
-      compileSassAndSave(path.join(sassPath, sassFile), cssPath).then(cssFile => {
+  return new Promise(async (resolve, reject) => {
+    for (const sassFile of options.files) {
+      await compileSassAndSave(path.join(sassPath, sassFile), cssPath).then(cssFile => {
         console.log('Created', cssFile);
       }).catch(error => {
         reject(error);
       });
-    });
-
+    }
+    
     resolve();
   }).catch(error => {
     throw new Error(error);
