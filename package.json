@@ -14,6 +14,10 @@
     "type": "git",
     "url": "git+https://github.com/eiskalteschatten/compile-sass.git"
   },
+  "files": [
+    "dist",
+    "Readme.md"
+  ],
   "keywords": [
     "sass",
     "scss",
