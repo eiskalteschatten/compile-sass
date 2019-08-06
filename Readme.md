@@ -53,7 +53,7 @@ app.use('/css/:cssName', compileSass());
 
 ##### CommonJS
 
-**Pay attention to the `compileSass.setup` which differs from the TypeScript variation!**
+*Pay attention to the `compileSass.setup` which differs from the TypeScript variation!*
 
 ```js
 const compileSass = require('compile-sass');
@@ -80,7 +80,7 @@ app.use('/css/:cssName', compileSass({
 ```
 ##### CommonJS
 
-**Pay attention to the `compileSass.setup` which differs from the TypeScript variation!**
+*Pay attention to the `compileSass.setup` which differs from the TypeScript variation!*
 
 ```js
 const compileSass = require('compile-sass');
