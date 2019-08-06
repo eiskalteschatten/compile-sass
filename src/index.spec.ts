@@ -1,13 +1,13 @@
 import * as path from 'path';
 import * as fs from 'fs';
 
-import { 
+import {
+  SetupOptions,
   default as setup,
   compileSass,
   compileSassAndSave,
   CompileMultipleOptions,
-  compileSassAndSaveMultiple,
-  setupCleanupOnExit
+  compileSassAndSaveMultiple
 } from './index';
 
 describe('Compile SASS', () => {
@@ -15,6 +15,27 @@ describe('Compile SASS', () => {
   const fullSassPath = path.join(sassPath, 'test.scss');
   const cssPath = path.resolve(__dirname, '..', 'test-data', 'css');
   const fullCssPath = path.join(cssPath, 'test.css');
+
+  it('setup', () => {
+    const options: SetupOptions = { sassFilePath: sassPath };
+    const thunk = setup(options);
+    expect(thunk).toBeInstanceOf(Function);
+
+    const mockReq = {
+      params: {
+        cssName: 'test.css'
+      }
+    };
+
+    const mockRes = {
+      header: (a, b) => {},
+      contentType: (a) => ({
+        send: (a) => {}
+      })
+    };
+
+    thunk(mockReq, mockRes);
+  });
 
   it('compileSassAndSave', async () => {
     const cssFile = await compileSassAndSave(fullSassPath, cssPath);

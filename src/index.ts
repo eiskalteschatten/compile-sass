@@ -25,7 +25,7 @@ export interface SetupOptions {
   }
 */
 
-export default function setup(options: SetupOptions) {
+export default function setup(options: SetupOptions): Function {
   const sassFilePath = options.sassFilePath || path.join(__dirname, '../public/scss/');
   const sassFileExt = options.sassFileExt || 'scss';
   const embedSrcMapInProd = options.embedSrcMapInProd || false;
@@ -129,7 +129,7 @@ export function compileSassAndSaveMultiple(options: CompileMultipleOptions): Pro
         reject(error);
       });
     }
-    
+
     resolve();
   }).catch(error => {
     throw new Error(error);
