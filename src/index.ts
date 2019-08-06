@@ -3,7 +3,7 @@ import * as fs from 'fs';
 import * as mkdirp from 'mkdirp';
 import * as sass from 'node-sass';
 import { exec } from 'child_process';
-import { Request, Response } from 'express';
+import { Request, Response, Application } from 'express';
 
 const nodeEnv = process.env.NODE_ENV;
 
@@ -25,7 +25,7 @@ export interface SetupOptions {
   }
 */
 
-export default function setup(options: SetupOptions): Function {
+export default function setup(options: SetupOptions): Application {
   const sassFilePath = options.sassFilePath || path.join(__dirname, '../public/scss/');
   const sassFileExt = options.sassFileExt || 'scss';
   const embedSrcMapInProd = options.embedSrcMapInProd || false;
