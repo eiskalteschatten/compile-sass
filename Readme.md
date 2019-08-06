@@ -44,16 +44,48 @@ The following are a couple of examples of how you can use it in a real-life appl
 
 ### For on-the-fly compiling
 
+##### TypeScript
+
+```js
+import compileSass from 'compile-sass';
+app.use('/css/:cssName', compileSass());
+```
+
+##### CommonJS
+
+**Pay attention to the `compileSass.setup` which differs from the TypeScript variation!**
+
 ```js
 const compileSass = require('compile-sass');
-app.use('/css/:cssName', compileSass());
+app.use('/css/:cssName', compileSass.setup());
 ```
 
 #### With options
 
+##### TypeScript
+
+```js
+import compileSass from 'compile-sass';
+
+app.use('/css/:cssName', compileSass({
+  sassFilePath: path.join(__dirname, 'public/scss/'),
+  sassFileExt: 'sass',
+  embedSrcMapInProd: true,
+  nodeSassOptions: {
+    errLogToConsole: true,
+    noCache: true,
+    force: true
+  }
+}));
+```
+##### CommonJS
+
+**Pay attention to the `compileSass.setup` which differs from the TypeScript variation!**
+
 ```js
 const compileSass = require('compile-sass');
-app.use('/css/:cssName', compileSass({
+
+app.use('/css/:cssName', compileSass.setup({
   sassFilePath: path.join(__dirname, 'public/scss/'),
   sassFileExt: 'sass',
   embedSrcMapInProd: true,
@@ -76,13 +108,15 @@ app.use('/css/:cssName', compileSass({
 ### For compiling and saving as static CSS files
 
 ```js
-const compileSass = require('compile-sass');
-compileSass.compileSassAndSaveMultiple({
+import { compileSassAndSaveMultiple } from 'compile-sass'; // TypeScript
+const { compileSassAndSaveMultiple } = require('compile-sass'); // CommonJS
+
+await compileSassAndSaveMultiple({
     sassPath: path.join(__dirname, 'public/scss/'),
     cssPath: path.join(__dirname, 'public/css/'),
     files: ['libs.scss']
   });
-})).then(...).catch(...);
+}));
 ```
 
 
@@ -93,8 +127,10 @@ compileSass.compileSassAndSaveMultiple({
 Returns the compiled SASS as a string.
 
 ```js
-const compileSass = require('compile-sass');
-const cssString = compileSass.compileSass().then(...).catch(...);
+import { compileSass } from 'compile-sass'; // TypeScript
+const { compileSass } = require('compile-sass'); // CommonJS
+
+const cssString = await compileSass();
 ```
 
 ### compileSassAndSave()
@@ -102,8 +138,10 @@ const cssString = compileSass.compileSass().then(...).catch(...);
 Compiles the given SASS file and saves it in the given directory.
 
 ```js
-const compileSass = require('compile-sass');
-compileSass.compileSassAndSave('full/path/to/sass-file.scss', 'full/path/to/css/').then(...).catch(...);
+import { compileSassAndSave } from 'compile-sass'; // TypeScript
+const { compileSassAndSave } = require('compile-sass'); // CommonJS
+
+compileSassAndSave('full/path/to/sass-file.scss', 'full/path/to/css/').then(...).catch(...);
 ```
 
 
@@ -112,8 +150,10 @@ compileSass.compileSassAndSave('full/path/to/sass-file.scss', 'full/path/to/css/
 Compiles multiple SASS files defined in the "files" option. They must all be located in the directory defined in the "sassPath" option. The CSS files will be saved in the directory defined in the "cssPath" option.
 
 ```js
-const compileSass = require('compile-sass');
-compileSass.compileSassAndSaveMultiple({
+import { compileSassAndSaveMultiple } from 'compile-sass'; // TypeScript
+const { compileSassAndSaveMultiple } = require('compile-sass'); // CommonJS
+
+compileSassAndSaveMultiple({
     sassPath: path.join(__dirname, 'public/scss/'),
     cssPath: path.join(__dirname, 'public/css/'),
     files: ['libs.scss']
@@ -126,10 +166,12 @@ compileSass.compileSassAndSaveMultiple({
 Deletes the passed directory when the app is exited. The idea is to pass the directory where your compiled CSS files are, so that they can be deleted when the app is exited and recompiled when the app starts.
 
 ```js
-const compileSass = require('compile-sass');
+import { setupCleanupOnExit } from 'compile-sass'; // TypeScript
+const { setupCleanupOnExit } = require('compile-sass'); // CommonJS
+
 process.on('SIGINT', () => {
   try {
-    compileSass.setupCleanupOnExit('full/path/to/css');
+    setupCleanupOnExit('full/path/to/css');
     process.exit(0);
   }
   catch(error) {
