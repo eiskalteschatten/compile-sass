@@ -36,7 +36,7 @@ npm install --save compile-sass
 The following are a couple of examples of how you can use it in a real-life application:
 
 - Setup: [Node.js](https://github.com/eiskalteschatten/nodejs-webapp/blob/master/src/lib/booting/compileSass.js) / [TypeScript](https://github.com/eiskalteschatten/typescript-webapp/blob/master/src/lib/booting/compileSass.ts)
-- Configuration: [Node.js](https://github.com/eiskalteschatten/nodejs-webapp/blob/master/config/default.js#L23) / [TypeScript](https://github.com/eiskalteschatten/typescript-webapp/blob/master/config/default.ts#L35)
+- Configuration: [Node.js](https://github.com/eiskalteschatten/nodejs-webapp/blob/master/config/default.js#L23) / [TypeScript](https://github.com/eiskalteschatten/typescript-webapp/blob/master/config/default.js#L23)
 - Integration into the app: [Node.js](https://github.com/eiskalteschatten/nodejs-webapp/blob/master/src/app.js#L46) / [TypeScript](https://github.com/eiskalteschatten/typescript-webapp/blob/master/src/app.ts#L30)
 
 
