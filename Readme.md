@@ -183,6 +183,11 @@ process.on('SIGINT', () => {
 
 ## Release Notes
 
+### 1.0.3
+
+- Fix the broken 1.0.2 release
+
+
 ### 1.0.2
 
 - Security updates
