@@ -183,6 +183,12 @@ process.on('SIGINT', () => {
 
 ## Release Notes
 
+### 1.0.2
+
+- Security updates
+- Update node-sass
+
+
 ### 1.0.1
 
 - Optimize what is included when the package is published (no more test files!)
