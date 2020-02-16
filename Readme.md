@@ -183,6 +183,13 @@ process.on('SIGINT', () => {
 
 ## Release Notes
 
+### 1.0.4
+
+- Security updates
+- Update node-sass
+- Update hoek 5 to @hapi/hoek 9
+
+
 ### 1.0.3
 
 - Fix the broken 1.0.2 release

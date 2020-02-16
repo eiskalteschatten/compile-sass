@@ -1,6 +1,6 @@
 {
   "name": "compile-sass",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "A module to compile SASS on-the-fly and/or save it to CSS files",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
@@ -34,19 +34,19 @@
   },
   "homepage": "https://github.com/eiskalteschatten/compile-sass#readme",
   "dependencies": {
+    "@hapi/hoek": "^9.0.3",
     "express": "^4.17.1",
-    "hoek": "^5.0.4",
     "mkdirp": "^0.5.1",
-    "node-sass": "^4.13.0"
+    "node-sass": "^4.13.1"
   },
   "devDependencies": {
-    "@types/jest": "^24.0.17",
+    "@types/jest": "^24.9.1",
     "@types/mkdirp": "^0.5.2",
-    "@types/node": "^12.6.9",
+    "@types/node": "^12.12.27",
     "@types/node-sass": "^4.11.0",
-    "jest": "^24.8.0",
-    "ts-jest": "^24.0.2",
-    "typescript": "^3.5.3"
+    "jest": "^24.9.0",
+    "ts-jest": "^24.3.0",
+    "typescript": "^3.7.5"
   },
   "peerDependencies": {
     "express": "^4.17.1"
