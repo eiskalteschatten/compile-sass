@@ -144,16 +144,24 @@ export function setupCleanupOnExit(cssPath: string) {
     process.on('SIGINT', () => {
       console.log('Exiting, running CSS cleanup');
 
-      exec(`rm -r ${cssPath}`, function(error) {
-        if (error) {
-          console.error(error);
+      fs.lstat(cssPath, (error: Error, stats: fs.Stats): void => {
+        if (stats.isDirectory) {
+          exec(`rm -r ${cssPath}`, function(error) {
+            if (error) {
+              console.error(error);
+              process.exit(1);
+            }
+    
+            console.log('Deleted CSS files');
+          });
+        }
+        else {
+          console.error('Could not delete CSS files because the given path is not a directory:', cssPath);
           process.exit(1);
         }
-
-        console.log('Deleted CSS files');
       });
+  
+      hasSetupCleanupOnExit = true;        
     });
-
-    hasSetupCleanupOnExit = true;
   }
 }
