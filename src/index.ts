@@ -8,6 +8,7 @@ import { Request, Response, Application } from 'express';
 const nodeEnv = process.env.NODE_ENV;
 
 let hasSetupCleanupOnExit = false;
+let nodeSassOptions = {};
 
 export interface SetupOptions {
   sassFilePath?: string;
@@ -29,11 +30,16 @@ export function setup(options: SetupOptions): Application {
   const sassFilePath = options.sassFilePath || path.join(__dirname, '../public/scss/');
   const sassFileExt = options.sassFileExt || 'scss';
   const embedSrcMapInProd = options.embedSrcMapInProd || false;
+  nodeSassOptions = nodeSassOptions;
 
   return function(req: Request, res: Response) {
     const cssName = req.params.cssName.replace(/\.css/, '');
     const sassFile = path.join(sassFilePath, cssName + '.' + sassFileExt);
-    const sassOptions = Object.assign(options.nodeSassOptions || {}, { file: sassFile });
+
+    const sassOptions: sass.Options = {
+      ...options.nodeSassOptions,
+      file: sassFile 
+    };
 
     if (!embedSrcMapInProd || nodeEnv !== 'production') {
       sassOptions.sourceMapEmbed = true;
@@ -59,6 +65,7 @@ export default setup;
 
 export function compileSass(fullSassPath: string): Promise<any> {
   const sassOptions: sass.Options = {
+    ...nodeSassOptions,
     file: fullSassPath
   };
 
