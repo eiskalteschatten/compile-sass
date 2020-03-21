@@ -8,12 +8,21 @@ import { Request, Response, Application } from 'express';
 const nodeEnv = process.env.NODE_ENV;
 
 let hasSetupCleanupOnExit = false;
-let nodeSassOptions = {};
+let nodeSassOptions: sass.Options = {};
+
+function resolveTildes(url: string): any {
+  if (url[0] === '~') {
+    url = path.resolve('node_modules', url.substr(1));
+  }
+
+  return { file: url };
+}
 
 export interface SetupOptions {
   sassFilePath?: string;
   sassFileExt?: string;
   embedSrcMapInProd?: boolean;
+  resolveTildes?: boolean;
   nodeSassOptions?: sass.Options;
 }
 
@@ -22,6 +31,7 @@ export interface SetupOptions {
     sassFilePath (default: 'public/scss'),
     sassFileExt (default: 'scss'),
     embedSrcMapInProd (default: false),
+    resolveTildes (default: false),
     nodeSassOptions (default: {})
   }
 */
@@ -30,14 +40,28 @@ export function setup(options: SetupOptions): Application {
   const sassFilePath = options.sassFilePath || path.join(__dirname, '../public/scss/');
   const sassFileExt = options.sassFileExt || 'scss';
   const embedSrcMapInProd = options.embedSrcMapInProd || false;
-  nodeSassOptions = nodeSassOptions;
+
+  nodeSassOptions = options.nodeSassOptions || {};
+
+  if (options.resolveTildes) {
+    const passedImporter = nodeSassOptions.importer;
+
+    if (passedImporter) {
+      nodeSassOptions.importer = Array.isArray(passedImporter) 
+        ? [...passedImporter, resolveTildes]
+        : [passedImporter, resolveTildes];
+    }
+    else {
+      nodeSassOptions.importer = resolveTildes;
+    }
+  }
 
   return function(req: Request, res: Response) {
     const cssName = req.params.cssName.replace(/\.css/, '');
     const sassFile = path.join(sassFilePath, cssName + '.' + sassFileExt);
 
     const sassOptions: sass.Options = {
-      ...options.nodeSassOptions,
+      ...nodeSassOptions,
       file: sassFile 
     };
 

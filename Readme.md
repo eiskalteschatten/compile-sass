@@ -71,6 +71,7 @@ app.use('/css/:cssName', compileSass({
   sassFilePath: path.join(__dirname, 'public/scss/'),
   sassFileExt: 'sass',
   embedSrcMapInProd: true,
+  resolveTildes: true,
   nodeSassOptions: {
     errLogToConsole: true,
     noCache: true,
@@ -89,6 +90,7 @@ app.use('/css/:cssName', compileSass.setup({
   sassFilePath: path.join(__dirname, 'public/scss/'),
   sassFileExt: 'sass',
   embedSrcMapInProd: true,
+  resolveTildes: true,
   nodeSassOptions: {
     errLogToConsole: true,
     noCache: true,
@@ -102,6 +104,7 @@ app.use('/css/:cssName', compileSass.setup({
 - sassFilePath (default: 'public/scss')
 - sassFileExt (default: 'scss')
 - embedSrcMapInProd (default: false)
+- resolveTildes (default: false)
 - nodeSassOptions (default: {})
 
 
@@ -182,6 +185,13 @@ process.on('SIGINT', () => {
 
 
 ## Release Notes
+
+### 1.1.0
+
+- Add a feature to resolve paths passed to `@import` that start with `~`
+- Security updates
+- Fix a bug where the node-sass options passed during setup weren't always used
+
 
 ### 1.0.5
 
