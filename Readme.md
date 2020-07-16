@@ -186,6 +186,11 @@ process.on('SIGINT', () => {
 
 ## Release Notes
 
+### 1.1.1
+
+- Security updates
+
+
 ### 1.1.0
 
 - Add a feature to resolve paths passed to `@import` that start with `~`
