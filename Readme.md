@@ -186,6 +186,11 @@ process.on('SIGINT', () => {
 
 ## Release Notes
 
+### 1.1.2
+
+- Security updates
+
+
 ### 1.1.1
 
 - Security updates
