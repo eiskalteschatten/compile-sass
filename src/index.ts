@@ -121,7 +121,7 @@ export function compileSassAndSave(fullSassPath: string, cssPath: string): Promi
   setupCleanupOnExit(cssPath);
 
   return compileSass(fullSassPath).then(css => {
-    return new Promise((resolve, reject) => {
+    return new Promise<void>((resolve, reject) => {
       mkdirp(cssPath, error => {
         if (error) {
           return reject(error);
@@ -154,7 +154,7 @@ export function compileSassAndSaveMultiple(options: CompileMultipleOptions): Pro
   const sassPath = options.sassPath;
   const cssPath = options.cssPath;
 
-  return new Promise(async (resolve, reject) => {
+  return new Promise<void>(async (resolve, reject) => {
     for (const sassFile of options.files) {
       await compileSassAndSave(path.join(sassPath, sassFile), cssPath).then(cssFile => {
         console.log('Created', cssFile);
