@@ -189,6 +189,7 @@ process.on('SIGINT', () => {
 ### 1.1.3
 
 - Security updates
+- Update TypeScript
 
 
 ### 1.1.2
