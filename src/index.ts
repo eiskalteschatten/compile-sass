@@ -177,12 +177,12 @@ export function setupCleanupOnExit(cssPath: string) {
 
       fs.lstat(cssPath, (error: Error, stats: fs.Stats): void => {
         if (stats.isDirectory) {
-          exec(`rm -r ${cssPath}`, function(error) {
+          fs.rmdirSync(cssPath, { recursive: true }, (error) => {
             if (error) {
               console.error(error);
               process.exit(1);
             }
-    
+
             console.log('Deleted CSS files');
           });
         }
