@@ -2,3 +2,5 @@ node_modules
 dist
 test-coverage
 test-data/css
+
+.DS_Store
