@@ -1,8 +1,7 @@
 import * as path from 'path';
 import * as fs from 'fs';
 import * as mkdirp from 'mkdirp';
-import * as sass from 'node-sass';
-import { exec } from 'child_process';
+import * as sass from 'sass';
 import { Request, Response, Application } from 'express';
 
 const nodeEnv = process.env.NODE_ENV;
