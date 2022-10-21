@@ -34,12 +34,10 @@
   },
   "homepage": "https://github.com/eiskalteschatten/compile-sass#readme",
   "dependencies": {
-    "mkdirp": "^0.5.5",
     "sass": "^1.55.0"
   },
   "devDependencies": {
     "@types/jest": "^24.9.1",
-    "@types/mkdirp": "^0.5.2",
     "@types/node": "^16.11.26",
     "express": "^4.17.1",
     "jest": "^24.9.0",

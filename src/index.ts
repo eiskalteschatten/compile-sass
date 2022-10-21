@@ -1,6 +1,5 @@
 import path from 'path';
 import fs from 'fs';
-import mkdirp from 'mkdirp';
 import sass from 'sass';
 import { Request, Response, Application } from 'express';
 
@@ -116,24 +115,15 @@ export function compileSassAndSave(fullSassPath: string, cssPath: string): Promi
   setupCleanupOnExit(cssPath);
 
   return compileSass(fullSassPath).then(css => {
-    return new Promise<void>((resolve, reject) => {
-      mkdirp(cssPath, error => {
-        if (error) {
-          return reject(error);
-        }
-        
-        resolve();
-      });
-    }).then(() => {
-      return new Promise((resolve, reject) => {
-        fs.writeFile(fullCssPath, css, error => {
-          if (error) {
-            return reject(error);
-          }
-
-          resolve(cssFile);
-        });
-      });
+    return fs.promises.mkdir(cssPath, { recursive: true })
+    .then(async () => {
+      try {
+        await fs.promises.writeFile(fullCssPath, css);
+        return cssFile;
+      }
+      catch (error) {
+        throw error;
+      }
     }).catch(console.error);
   });
 }
