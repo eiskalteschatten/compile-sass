@@ -37,21 +37,28 @@ export function setup(options: SetupOptions): Application {
   _sassOptions = options.sassOptions || {};
 
   if (options.resolveTildes) {
-    const passedImporters = _sassOptions.importers;
-
+    const passedImporters = _sassOptions.importers || [];
+    
     if (passedImporters) {
       _sassOptions.importers = [
         ...passedImporters, 
         {
           findFileUrl(url: string) {
-            if (!url.startsWith('~')) return null;
-            return new URL(url.substring(1), pathToFileURL('node_modules'));
+            if (!url.startsWith('~')) {
+              return null;
+            }
+
+            const newUrl = new URL(url.substring(1), pathToFileURL(path.join(__dirname, '..', 'node_modules')));
+            // This is a nasty workaround because pathToFileURL is not creating an absolute path despite
+            // the documentation saying it does: https://nodejs.org/docs/latest-v16.x/api/url.html#urlpathtofileurlpath
+            newUrl.href = path.join('file://', __dirname, '..', 'node_modules', url.substring(1));
+            return newUrl;
           }
         }
       ];
     }
   }
-
+  
   return async function(req: Request, res: Response) {
     try {
       const cssName = req.params.cssName.replace(/\.css/, '');
@@ -88,14 +95,14 @@ export async function compileSass(fullSassPath: string): Promise<any> {
     const sassOptions: SassOptions = {
       ..._sassOptions,
     };
-
+    
     if (nodeEnv !== 'production') {
       sassOptions.sourceMap = true;
     }
     else {
       sassOptions.style = 'compressed';
     }
-
+    
     const result = await sass.compileAsync(fullSassPath, sassOptions);
     return result.css.toString();
   }
