@@ -85,28 +85,25 @@ export function setup(options: SetupOptions): Application {
 export default setup;
 
 
-export function compileSass(fullSassPath: string): Promise<any> {
-  const sassOptions: SassOptions = {
-    ..._sassOptions,
-    file: fullSassPath
-  };
+export async function compileSass(fullSassPath: string): Promise<any> {
+  try {
+    const sassOptions: SassOptions = {
+      ..._sassOptions,
+    };
 
-  if (nodeEnv !== 'production') {
-    sassOptions.sourceMapEmbed = true;
+    if (nodeEnv !== 'production') {
+      sassOptions.sourceMap = true;
+    }
+    else {
+      sassOptions.outputStyle = 'compressed';
+    }
+
+    const result = await sass.compileAsync(fullSassPath, sassOptions);
+    return result.css.toString();
   }
-  else {
-    sassOptions.outputStyle = 'compressed';
+  catch (error) {
+    console.error(error);
   }
-
-  return new Promise((resolve, reject) => {
-    sass.render(sassOptions, (error: sass.SassError, result: sass.Result) => {
-      if (error) {
-        return reject(error);
-      }
-
-      resolve(result.css.toString());
-    });
-  }).catch(console.error);
 }
 
 
