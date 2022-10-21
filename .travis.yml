@@ -1,18 +1,18 @@
 language: node_js
 
 node_js:
-    - "10"
-    - "11"
     - "12"
     - "13"
     - "14"
+    - "16"
+    - "18"
 
 env:
     - NODE_ENV=test
 
 install:
     - npm install
-    - npm install express
+    - npm install express sass
     - npm run build
 
 cache: npm
