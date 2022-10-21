@@ -19,6 +19,10 @@ The goal of this project is twofold:
 - <a href="#release-notes">Release Notes</a>
 - <a href="#maintainer">Maintainer</a>
 
+**Important Note:**
+
+This is the documentation for version 2. If you need the documentation for version 1, please see the Readme from the last release of version 1: https://github.com/eiskalteschatten/compile-sass/tree/v1.1.3
+
 
 ## Requirements
 
