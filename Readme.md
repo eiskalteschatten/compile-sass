@@ -186,6 +186,17 @@ process.on('SIGINT', () => {
 
 ## Release Notes
 
+### 2.0.0
+
+- Move away from the deprecated `node-sass` package in lieu of the Dart-based `sass` package
+  - **Warning: Breaking change! Check the documentation above.**
+- Update all npm packages
+- Remove the install of `express` since it's a peerDependency and should be managed by the installing project
+- Remove packages that can be replaced with functionality from Node's standard library
+- Support for Node >= 16
+- Security updates
+
+
 ### 1.1.3
 
 - Security updates
