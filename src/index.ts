@@ -160,7 +160,6 @@ export function compileSassAndSaveMultiple(options: CompileMultipleOptions): Pro
   });
 }
 
-
 export function setupCleanupOnExit(cssPath: string) {
   if (!hasSetupCleanupOnExit){
     process.on('SIGINT', () => {

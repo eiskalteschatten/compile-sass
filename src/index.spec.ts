@@ -9,11 +9,27 @@ import setup, {
   compileSassAndSaveMultiple
 } from './index';
 
+function deleteFiles(_path: string, files: string[]) {
+  files.forEach(file => {
+    const fullPath = path.join(_path, file);
+    
+    if (fs.existsSync(fullPath)) {
+      fs.unlinkSync(fullPath);
+    }
+  });
+}
+
 describe('Compile SASS', () => {
   const sassPath = path.resolve(__dirname, '..', 'test-data');
   const fullSassPath = path.join(sassPath, 'test.scss');
   const cssPath = path.resolve(__dirname, '..', 'test-data', 'css');
   const fullCssPath = path.join(cssPath, 'test.css');
+  const files = ['test.scss', 'test2.scss'];
+  const cssFiles = ['test.css', 'test2.css'];
+
+  beforeAll(() => {
+    deleteFiles(cssPath, cssFiles);
+  });
 
   it('setup', () => {
     const options: SetupOptions = { sassFilePath: sassPath };
@@ -51,7 +67,7 @@ describe('Compile SASS', () => {
     const options: CompileMultipleOptions = {
       sassPath,
       cssPath,
-      files: ['test.scss', 'test2.scss']
+      files
     };
 
     await compileSassAndSaveMultiple(options);
@@ -66,6 +82,12 @@ describe('Compile SASS with Bootstrap', () => {
   const fullSassPath = path.join(sassPath, 'bootstrap.scss');
   const cssPath = path.resolve(__dirname, '..', 'test-data', 'css');
   const fullCssPath = path.join(cssPath, 'bootstrap.css');
+  const files = ['bootstrap.scss', 'bootstrap2.scss'];
+  const cssFiles = ['bootstrap.css', 'bootstrap2.css'];
+
+  beforeAll(() => {
+    deleteFiles(cssPath, cssFiles);
+  });
 
   it('setup', () => {
     const options: SetupOptions = { 
@@ -106,7 +128,7 @@ describe('Compile SASS with Bootstrap', () => {
     const options: CompileMultipleOptions = {
       sassPath,
       cssPath,
-      files: ['bootstrap.scss', 'bootstrap2.scss']
+      files
     };
 
     await compileSassAndSaveMultiple(options);
