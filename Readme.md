@@ -8,6 +8,10 @@ The goal of this project is twofold:
 1. To provide a library that can compile SASS files on page load when using `NODE_ENV=development` in order to reduce development time (on-the-fly)
 2. To enable compilation and saving of SASS files to CSS files on all other environments when, for example, the application starts or with an npm script
 
+**Important Note:**
+
+This is the documentation for version 2. If you need the documentation for version 1, please see the Readme from the last release of version 1: https://github.com/eiskalteschatten/compile-sass/tree/v1.1.3
+
 
 ## Table of Contents
 
@@ -18,10 +22,6 @@ The goal of this project is twofold:
 - <a href="#api">API</a>
 - <a href="#release-notes">Release Notes</a>
 - <a href="#maintainer">Maintainer</a>
-
-**Important Note:**
-
-This is the documentation for version 2. If you need the documentation for version 1, please see the Readme from the last release of version 1: https://github.com/eiskalteschatten/compile-sass/tree/v1.1.3
 
 
 ## Requirements
