@@ -170,16 +170,16 @@ export function setupCleanupOnExit(cssPath: string) {
     process.on('SIGINT', () => {
       console.log('Exiting, running CSS cleanup');
 
-      fs.lstat(cssPath, (error: Error, stats: fs.Stats): void => {
+      fs.lstat(cssPath, async (error: Error, stats: fs.Stats): Promise<void> => {
         if (stats.isDirectory) {
-          fs.rmdirSync(cssPath, { recursive: true, force: true }, (error) => {
-            if (error) {
-              console.error(error);
-              process.exit(1);
-            }
-
+          try {
+            await fs.promises.rmdir(cssPath, { recursive: true });
             console.log('Deleted CSS files');
-          });
+          }
+          catch (error) {
+            console.error(error);
+            process.exit(1);
+          }
         }
         else {
           console.error('Could not delete CSS files because the given path is not a directory:', cssPath);
