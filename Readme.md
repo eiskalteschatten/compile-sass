@@ -105,7 +105,7 @@ app.use('/css/:cssName', compileSass.setup({
 - sassFileExt (default: 'scss')
 - embedSrcMapInProd (default: false)
 - resolveTildes (default: false)
-- sassOptions (default: {})
+- sassOptions (default: {}) See https://sass-lang.com/documentation/js-api/interfaces/Options for more details
 
 
 ### For compiling and saving as static CSS files

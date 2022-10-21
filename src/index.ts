@@ -95,7 +95,7 @@ export async function compileSass(fullSassPath: string): Promise<any> {
       sassOptions.sourceMap = true;
     }
     else {
-      sassOptions.outputStyle = 'compressed';
+      sassOptions.style = 'compressed';
     }
 
     const result = await sass.compileAsync(fullSassPath, sassOptions);
@@ -172,7 +172,7 @@ export function setupCleanupOnExit(cssPath: string) {
 
       fs.lstat(cssPath, (error: Error, stats: fs.Stats): void => {
         if (stats.isDirectory) {
-          fs.rmdirSync(cssPath, { recursive: true }, (error) => {
+          fs.rmdirSync(cssPath, { recursive: true, force: true }, (error) => {
             if (error) {
               console.error(error);
               process.exit(1);
