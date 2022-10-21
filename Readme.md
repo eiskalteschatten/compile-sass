@@ -109,7 +109,8 @@ app.use('/css/:cssName', compileSass.setup({
 - sassFileExt (default: 'scss')
 - embedSrcMapInProd (default: false)
 - resolveTildes (default: false)
-- sassOptions (default: {}) See https://sass-lang.com/documentation/js-api/interfaces/Options for more details
+- sassOptions (default: {}) 
+  - See https://sass-lang.com/documentation/js-api/interfaces/Options for more details
 
 
 ### For compiling and saving as static CSS files
@@ -198,6 +199,8 @@ process.on('SIGINT', () => {
 - Remove the install of `express` since it's a peerDependency and should be managed by the installing project
 - Remove packages that can be replaced with functionality from Node's standard library
 - Support for Node >= 16
+- Use `bootstrap` to improve testing by compiling real world examples
+- Add more asynchronous bahavior to boost performance
 - Security updates
 
 
