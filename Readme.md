@@ -1,6 +1,6 @@
 # compile-sass
 
-[![Build Status](https://travis-ci.org/eiskalteschatten/compile-sass.svg?branch=master)](https://travis-ci.org/eiskalteschatten/compile-sass)
+[![Tests](https://github.com/eiskalteschatten/compile-sass/actions/workflows/tests.yml/badge.svg)](https://github.com/eiskalteschatten/compile-sass/actions/workflows/tests.yml)
 
 > A module to compile SASS on-the-fly and/or save it to CSS files using [node-sass](https://github.com/sass/node-sass)
 
