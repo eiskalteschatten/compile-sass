@@ -44,7 +44,7 @@ npm install --save compile-sass sass express
 
 The following are a couple of examples of how you can use it in a real-life application:
 
-*Note: These examples still use version 1. I will remove this notice once they have been updated.*
+*Note: These examples still use version 1. This notice will be removed once they have been updated.*
 
 - Setup: [Node.js](https://github.com/eiskalteschatten/nodejs-webapp/blob/master/src/lib/booting/compileSass.js) / [TypeScript](https://github.com/eiskalteschatten/typescript-webapp/blob/master/src/lib/booting/compileSass.ts)
 - Configuration: [Node.js](https://github.com/eiskalteschatten/nodejs-webapp/blob/master/config/default.js#L23) / [TypeScript](https://github.com/eiskalteschatten/typescript-webapp/blob/master/config/default.js#L23)
