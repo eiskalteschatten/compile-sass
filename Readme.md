@@ -1,12 +1,17 @@
 # compile-sass
 
-[![Build Status](https://travis-ci.org/eiskalteschatten/compile-sass.svg?branch=master)](https://travis-ci.org/eiskalteschatten/compile-sass)
+[![Tests](https://github.com/eiskalteschatten/compile-sass/actions/workflows/tests.yml/badge.svg)](https://github.com/eiskalteschatten/compile-sass/actions/workflows/tests.yml)
+[![Build](https://github.com/eiskalteschatten/compile-sass/actions/workflows/build.yml/badge.svg)](https://github.com/eiskalteschatten/compile-sass/actions/workflows/build.yml)
 
 > A module to compile SASS on-the-fly and/or save it to CSS files using [node-sass](https://github.com/sass/node-sass)
 
 The goal of this project is twofold:
 1. To provide a library that can compile SASS files on page load when using `NODE_ENV=development` in order to reduce development time (on-the-fly)
 2. To enable compilation and saving of SASS files to CSS files on all other environments when, for example, the application starts or with an npm script
+
+**Important Note:**
+
+This is the documentation for v2. If you need the documentation for v1, please see the Readme from the last release of v1: https://github.com/eiskalteschatten/compile-sass/tree/v1.1.3
 
 
 ## Table of Contents
@@ -16,24 +21,32 @@ The goal of this project is twofold:
 - <a href="#example-usage">Example Usage</a>
 - <a href="#usage">Usage</a>
 - <a href="#api">API</a>
+- <a href="#migration-guide">Migration Guide</a>
 - <a href="#release-notes">Release Notes</a>
 - <a href="#maintainer">Maintainer</a>
 
 
 ## Requirements
 
-This module is tested with Node.js >= 10. It might work with Node.js <= 9, but is not tested.
+This module is tested with Node.js >= 14. It might work with Node.js <= 13, but is not tested.
+
+Peer Dependencies:
+
+- [sass](https://www.npmjs.com/package/sass)
+- [express](https://www.npmjs.com/package/express)
 
 
 ## Install
 
 ```
-npm install --save compile-sass
+npm install --save compile-sass sass express
 ```
 
 ## Example Usage
 
 The following are a couple of examples of how you can use it in a real-life application:
+
+*Note: These examples still use v1. This notice will be removed once they have been updated.*
 
 - Setup: [Node.js](https://github.com/eiskalteschatten/nodejs-webapp/blob/master/src/lib/booting/compileSass.js) / [TypeScript](https://github.com/eiskalteschatten/typescript-webapp/blob/master/src/lib/booting/compileSass.ts)
 - Configuration: [Node.js](https://github.com/eiskalteschatten/nodejs-webapp/blob/master/config/default.js#L23) / [TypeScript](https://github.com/eiskalteschatten/typescript-webapp/blob/master/config/default.js#L23)
@@ -72,10 +85,9 @@ app.use('/css/:cssName', compileSass({
   sassFileExt: 'sass',
   embedSrcMapInProd: true,
   resolveTildes: true,
-  nodeSassOptions: {
-    errLogToConsole: true,
-    noCache: true,
-    force: true
+  sassOptions: {
+    alertAscii: true,
+    verbose: true
   }
 }));
 ```
@@ -91,10 +103,9 @@ app.use('/css/:cssName', compileSass.setup({
   sassFileExt: 'sass',
   embedSrcMapInProd: true,
   resolveTildes: true,
-  nodeSassOptions: {
-    errLogToConsole: true,
-    noCache: true,
-    force: true
+  sassOptions: {
+    alertAscii: true,
+    verbose: true
   }
 }));
 ```
@@ -105,7 +116,8 @@ app.use('/css/:cssName', compileSass.setup({
 - sassFileExt (default: 'scss')
 - embedSrcMapInProd (default: false)
 - resolveTildes (default: false)
-- nodeSassOptions (default: {})
+- sassOptions (default: {}) 
+  - See https://sass-lang.com/documentation/js-api/interfaces/Options for more details
 
 
 ### For compiling and saving as static CSS files
@@ -184,7 +196,32 @@ process.on('SIGINT', () => {
 ```
 
 
+## Migration Guide 
+
+### v1 to v2
+
+The update to v2 includes a couple of breaking changes to be aware of:
+
+- `express` and `sass` are now peer dependencies that need to be installed seperately. `compile-sass` will not work without them.
+- The `nodeSassOptions` parameter in the setup is now called `sassOptions` because the new sass compiler uses a different set of options than its predecessor. See https://sass-lang.com/documentation/js-api/interfaces/Options for the options supported by the new compiler.
+- `compile-sass` now requires Node >= 14
+
+
 ## Release Notes
+
+### 2.0.0
+
+- Move away from the deprecated `node-sass` package in lieu of the Dart-based `sass` package
+  - **Warning: Breaking change! `nodeSassOptions` is now `sassOptions` with different parameters. Check the documentation above.**
+  - The `sass` package is now a peer dependency and needs to be managed by the installing project
+- Update all npm packages
+- Remove `express` as a direct dependency since it's a peer dependency and should be managed by the installing project
+- Remove packages that can be replaced with functionality from Node's standard library
+- Support for Node >= 16
+- Use `bootstrap` to improve testing by compiling real world examples
+- Add more asynchronous bahavior to boost performance
+- Security updates
+
 
 ### 1.1.3
 
