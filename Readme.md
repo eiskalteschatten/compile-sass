@@ -10,7 +10,7 @@ The goal of this project is twofold:
 
 **Important Note:**
 
-This is the documentation for version 2. If you need the documentation for version 1, please see the Readme from the last release of version 1: https://github.com/eiskalteschatten/compile-sass/tree/v1.1.3
+This is the documentation for v2. If you need the documentation for v1, please see the Readme from the last release of v1: https://github.com/eiskalteschatten/compile-sass/tree/v1.1.3
 
 
 ## Table of Contents
@@ -20,13 +20,14 @@ This is the documentation for version 2. If you need the documentation for versi
 - <a href="#example-usage">Example Usage</a>
 - <a href="#usage">Usage</a>
 - <a href="#api">API</a>
+- <a href="#migration-guide">Migration Guide</a>
 - <a href="#release-notes">Release Notes</a>
 - <a href="#maintainer">Maintainer</a>
 
 
 ## Requirements
 
-This module is tested with Node.js >= 16. It might work with Node.js <= 15, but is not tested.
+This module is tested with Node.js >= 14. It might work with Node.js <= 13, but is not tested.
 
 Peer Dependencies:
 
@@ -44,7 +45,7 @@ npm install --save compile-sass sass express
 
 The following are a couple of examples of how you can use it in a real-life application:
 
-*Note: These examples still use version 1. This notice will be removed once they have been updated.*
+*Note: These examples still use v1. This notice will be removed once they have been updated.*
 
 - Setup: [Node.js](https://github.com/eiskalteschatten/nodejs-webapp/blob/master/src/lib/booting/compileSass.js) / [TypeScript](https://github.com/eiskalteschatten/typescript-webapp/blob/master/src/lib/booting/compileSass.ts)
 - Configuration: [Node.js](https://github.com/eiskalteschatten/nodejs-webapp/blob/master/config/default.js#L23) / [TypeScript](https://github.com/eiskalteschatten/typescript-webapp/blob/master/config/default.js#L23)
@@ -192,6 +193,17 @@ process.on('SIGINT', () => {
   }
 });
 ```
+
+
+## Migration Guide 
+
+### v1 to v2
+
+The update to v2 includes a couple of breaking changes to be aware of:
+
+- `express` and `sass` are now peer dependencies that need to be installed seperately. `compile-sass` will not work without them.
+- The `nodeSassOptions` parameter in the setup is now called `sassOptions` because the new sass compiler uses a different set of options than its predecessor. See https://sass-lang.com/documentation/js-api/interfaces/Options for the options supported by the new compiler.
+- `compile-sass` now requires Node >= 14
 
 
 ## Release Notes
