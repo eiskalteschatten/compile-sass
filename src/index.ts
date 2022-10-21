@@ -2,21 +2,14 @@ import path from 'path';
 import fs from 'fs';
 import sass from 'sass';
 import { Request, Response, Application } from 'express';
+import { pathToFileURL } from 'url';
 
 const nodeEnv = process.env.NODE_ENV;
 
-type SassOptions = sass.Options<'async' | 'sync'>;
+type SassOptions = sass.Options<'async'>;
 
 let hasSetupCleanupOnExit = false;
 let _sassOptions: SassOptions = {};
-
-function resolveTildes(url: string): any {
-  if (url[0] === '~') {
-    url = path.resolve('node_modules', url.substring(1));
-  }
-
-  return { file: url };
-}
 
 export interface SetupOptions {
   sassFilePath?: string;
@@ -47,9 +40,15 @@ export function setup(options: SetupOptions): Application {
     const passedImporters = _sassOptions.importers;
 
     if (passedImporters) {
-      _sassOptions.importers = Array.isArray(passedImporters) 
-        ? [...passedImporters, resolveTildes]
-        : [passedImporters, resolveTildes];
+      _sassOptions.importers = [
+        ...passedImporters, 
+        {
+          findFileUrl(url: string) {
+            if (!url.startsWith('~')) return null;
+            return new URL(url.substring(1), pathToFileURL('node_modules'));
+          }
+        }
+      ];
     }
   }
 
