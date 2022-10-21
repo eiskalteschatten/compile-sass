@@ -12,7 +12,7 @@ let _sassOptions: SassOptions = {};
 
 function resolveTildes(url: string): any {
   if (url[0] === '~') {
-    url = path.resolve('node_modules', url.substr(1));
+    url = path.resolve('node_modules', url.substring(1));
   }
 
   return { file: url };
