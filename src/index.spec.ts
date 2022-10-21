@@ -77,7 +77,7 @@ describe('Compile SASS', () => {
 });
 
 describe('Compile SASS with Bootstrap', () => {
-  const timeout = 10000;
+  const timeout = 100000;
   const sassPath = path.resolve(__dirname, '..', 'test-data');
   const fullSassPath = path.join(sassPath, 'bootstrap.scss');
   const cssPath = path.resolve(__dirname, '..', 'test-data', 'css');
