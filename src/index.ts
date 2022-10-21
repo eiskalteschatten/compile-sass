@@ -1,13 +1,15 @@
-import * as path from 'path';
-import * as fs from 'fs';
-import * as mkdirp from 'mkdirp';
-import * as sass from 'sass';
+import path from 'path';
+import fs from 'fs';
+import mkdirp from 'mkdirp';
+import sass from 'sass';
 import { Request, Response, Application } from 'express';
 
 const nodeEnv = process.env.NODE_ENV;
 
+type SassOptions = sass.Options<'async' | 'sync'>;
+
 let hasSetupCleanupOnExit = false;
-let nodeSassOptions: sass.Options = {};
+let _sassOptions: SassOptions = {};
 
 function resolveTildes(url: string): any {
   if (url[0] === '~') {
@@ -22,7 +24,7 @@ export interface SetupOptions {
   sassFileExt?: string;
   embedSrcMapInProd?: boolean;
   resolveTildes?: boolean;
-  nodeSassOptions?: sass.Options;
+  sassOptions?: SassOptions;
 }
 
 /*
@@ -31,7 +33,7 @@ export interface SetupOptions {
     sassFileExt (default: 'scss'),
     embedSrcMapInProd (default: false),
     resolveTildes (default: false),
-    nodeSassOptions (default: {})
+    sassOptions (default: {})
   }
 */
 
@@ -40,38 +42,32 @@ export function setup(options: SetupOptions): Application {
   const sassFileExt = options.sassFileExt || 'scss';
   const embedSrcMapInProd = options.embedSrcMapInProd || false;
 
-  nodeSassOptions = options.nodeSassOptions || {};
+  _sassOptions = options.sassOptions || {};
 
   if (options.resolveTildes) {
-    const passedImporter = nodeSassOptions.importer;
+    const passedImporters = _sassOptions.importers;
 
-    if (passedImporter) {
-      nodeSassOptions.importer = Array.isArray(passedImporter) 
-        ? [...passedImporter, resolveTildes]
-        : [passedImporter, resolveTildes];
-    }
-    else {
-      nodeSassOptions.importer = resolveTildes;
+    if (passedImporters) {
+      _sassOptions.importers = Array.isArray(passedImporters) 
+        ? [...passedImporters, resolveTildes]
+        : [passedImporters, resolveTildes];
     }
   }
 
-  return function(req: Request, res: Response) {
-    const cssName = req.params.cssName.replace(/\.css/, '');
-    const sassFile = path.join(sassFilePath, cssName + '.' + sassFileExt);
+  return async function(req: Request, res: Response) {
+    try {
+      const cssName = req.params.cssName.replace(/\.css/, '');
+      const sassFile = path.join(sassFilePath, cssName + '.' + sassFileExt);
 
-    const sassOptions: sass.Options = {
-      ...nodeSassOptions,
-      file: sassFile 
-    };
+      const sassOptions: SassOptions = {
+        ..._sassOptions,
+      };
 
-    if (!embedSrcMapInProd || nodeEnv !== 'production') {
-      sassOptions.sourceMapEmbed = true;
-    }
-
-    sass.render(sassOptions, (error, result) => {
-      if (error) {
-        throw error;
+      if (!embedSrcMapInProd || nodeEnv !== 'production') {
+        sassOptions.sourceMap = true;
       }
+
+      const result = await sass.compileAsync(sassFile, sassOptions);
 
       if (nodeEnv === 'production') {
         // Set Cache-Control header to one day
@@ -79,7 +75,10 @@ export function setup(options: SetupOptions): Application {
       }
 
       res.contentType('text/css').send(result.css.toString());
-    });
+    }
+    catch (error) {
+      throw error;
+    }
   };
 }
 
@@ -87,8 +86,8 @@ export default setup;
 
 
 export function compileSass(fullSassPath: string): Promise<any> {
-  const sassOptions: sass.Options = {
-    ...nodeSassOptions,
+  const sassOptions: SassOptions = {
+    ..._sassOptions,
     file: fullSassPath
   };
 

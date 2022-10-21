@@ -72,7 +72,7 @@ app.use('/css/:cssName', compileSass({
   sassFileExt: 'sass',
   embedSrcMapInProd: true,
   resolveTildes: true,
-  nodeSassOptions: {
+  sassOptions: {
     errLogToConsole: true,
     noCache: true,
     force: true
@@ -91,7 +91,7 @@ app.use('/css/:cssName', compileSass.setup({
   sassFileExt: 'sass',
   embedSrcMapInProd: true,
   resolveTildes: true,
-  nodeSassOptions: {
+  sassOptions: {
     errLogToConsole: true,
     noCache: true,
     force: true
@@ -105,7 +105,7 @@ app.use('/css/:cssName', compileSass.setup({
 - sassFileExt (default: 'scss')
 - embedSrcMapInProd (default: false)
 - resolveTildes (default: false)
-- nodeSassOptions (default: {})
+- sassOptions (default: {})
 
 
 ### For compiling and saving as static CSS files
