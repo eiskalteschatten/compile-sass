@@ -26,18 +26,25 @@ This is the documentation for version 2. If you need the documentation for versi
 
 ## Requirements
 
-This module is tested with Node.js >= 10. It might work with Node.js <= 9, but is not tested.
+This module is tested with Node.js >= 16. It might work with Node.js <= 15, but is not tested.
+
+Peer Dependencies:
+
+- [sass](https://www.npmjs.com/package/sass)
+- [express](https://www.npmjs.com/package/express)
 
 
 ## Install
 
 ```
-npm install --save compile-sass
+npm install --save compile-sass sass express
 ```
 
 ## Example Usage
 
 The following are a couple of examples of how you can use it in a real-life application:
+
+*Note: These examples still use version 1. I will remove this notice once they have been updated. *
 
 - Setup: [Node.js](https://github.com/eiskalteschatten/nodejs-webapp/blob/master/src/lib/booting/compileSass.js) / [TypeScript](https://github.com/eiskalteschatten/typescript-webapp/blob/master/src/lib/booting/compileSass.ts)
 - Configuration: [Node.js](https://github.com/eiskalteschatten/nodejs-webapp/blob/master/config/default.js#L23) / [TypeScript](https://github.com/eiskalteschatten/typescript-webapp/blob/master/config/default.js#L23)
@@ -77,9 +84,8 @@ app.use('/css/:cssName', compileSass({
   embedSrcMapInProd: true,
   resolveTildes: true,
   sassOptions: {
-    errLogToConsole: true,
-    noCache: true,
-    force: true
+    alertAscii: true,
+    verbose: true
   }
 }));
 ```
@@ -96,9 +102,8 @@ app.use('/css/:cssName', compileSass.setup({
   embedSrcMapInProd: true,
   resolveTildes: true,
   sassOptions: {
-    errLogToConsole: true,
-    noCache: true,
-    force: true
+    alertAscii: true,
+    verbose: true
   }
 }));
 ```
@@ -194,9 +199,10 @@ process.on('SIGINT', () => {
 ### 2.0.0
 
 - Move away from the deprecated `node-sass` package in lieu of the Dart-based `sass` package
-  - **Warning: Breaking change! Check the documentation above.**
+  - **Warning: Breaking change! `nodeSassOptions` is now `sassOptions` with different parameters. Check the documentation above.**
+  - The `sass` package is now a peer dependency and needs to be managed by the installing project
 - Update all npm packages
-- Remove the install of `express` since it's a peerDependency and should be managed by the installing project
+- Remove `express` as a direct dependency since it's a peer dependency and should be managed by the installing project
 - Remove packages that can be replaced with functionality from Node's standard library
 - Support for Node >= 16
 - Use `bootstrap` to improve testing by compiling real world examples
