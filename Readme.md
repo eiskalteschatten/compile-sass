@@ -1,6 +1,7 @@
 # compile-sass
 
 [![Tests](https://github.com/eiskalteschatten/compile-sass/actions/workflows/tests.yml/badge.svg)](https://github.com/eiskalteschatten/compile-sass/actions/workflows/tests.yml)
+[![Build](https://github.com/eiskalteschatten/compile-sass/actions/workflows/build.yml/badge.svg)](https://github.com/eiskalteschatten/compile-sass/actions/workflows/build.yml)
 
 > A module to compile SASS on-the-fly and/or save it to CSS files using [node-sass](https://github.com/sass/node-sass)
 
