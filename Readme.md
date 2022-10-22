@@ -219,7 +219,7 @@ The update to v2 includes a couple of breaking changes to be aware of:
 - Remove packages that can be replaced with functionality from Node's standard library
 - Support for Node >= 16
 - Use `bootstrap` to improve testing by compiling real world examples
-- Add more asynchronous bahavior to boost performance
+- Add more asynchronous behavior to boost performance
 - Security updates
 
 
